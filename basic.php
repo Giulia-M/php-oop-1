@@ -12,7 +12,6 @@ class Movie {
   public $cast;
   public $language;
 
-  public $flags;
 
 
 
@@ -26,7 +25,7 @@ class Movie {
     $this->cover = $sMovie["cover"];
 
     $this->language = $sMovie["language"];
-    $this->flags = $sMovie["flags"];
+
 
   }
 
@@ -43,27 +42,38 @@ class Movie {
 
 
   public function format() {
-      return 
-
+      
+    $result = 
      "<h1>" . $this->title . "</h1>" .
      "<p>" . $this->year . "</p>" .
      "<p>" . $this->description . "</p>" .
      "<img src=" .  $this->cover . ">" .
      "<p>" . $this->vote . "</p>" .
-     "<p>" . $this->cast . "</p>" .
-     "<img style=width:50px src=" .  $this->flags . ">" .
-     "<p>" . $this->language . "</p>";
+     "<p>" . $this->cast . "</p>" ;
 
-   
+     if(!$this->getFlagsImg() == NULL) {
+
+      $result .= "<img style='width:50px' src='" .  $this->getFlagsImg()  . "'>" ;
+     }
+     $result .="<p>" . $this->language . "</p>";
+
+   return $result;
   }
+  
+  
+  public function getFlagsImg() {
+    
+        if ($this->language == "en") {
+        return 'img/en.jpg';
+        } else if ($this->language == "it") {
+          return 'img/it.png';
+        } else {
+          return NULL;
+        }
 
-  //   public function setFlags($flags) {
-//     if ($flags == "en") {
-//         "<img style=width:50px src=" .  $this->flags . ">";
-//     }
-
-//     return $this->flags;
-//   }
+        
+  }
+  
   
 }
 
